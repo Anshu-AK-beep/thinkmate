@@ -1,0 +1,266 @@
+/* ============================================================
+   ThinkMate — Custom Theme (tweakcn-compatible)
+   Aesthetic: "Focused Scholar" — warm, intelligent, distraction-free
+   Fonts: Lora (display/headings) + IBM Plex Sans (body/UI)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  /* Background scale — warm parchment, not cold white */
+  --background:        255 251 244;   /* #fffbf4 — warm off-white */
+  --foreground:        20  17  12;    /* #14110c — deep warm ink */
+
+  /* Card / surface */
+  --card:              252 248 240;   /* #fcf8f0 */
+  --card-foreground:   20  17  12;
+
+  /* Popover */
+  --popover:           252 248 240;
+  --popover-foreground: 20 17 12;
+
+  /* Primary — deep teal-indigo: focused, trustworthy, calm */
+  --primary:           37  99  112;   /* #256370 */
+  --primary-foreground: 252 248 240;
+
+  /* Secondary — warm amber: warmth, curiosity, energy */
+  --secondary:         217 143  52;   /* #d98f34 */
+  --secondary-foreground: 20 17 12;
+
+  /* Muted — warm grey for placeholders, captions */
+  --muted:             237 230 218;   /* #ede6da */
+  --muted-foreground:  120 105  88;   /* #786958 */
+
+  /* Accent — soft sage green: correct, growing, positive */
+  --accent:            87  143 115;   /* #578f73 */
+  --accent-foreground: 252 248 240;
+
+  /* Destructive — terracotta: misconception flags, errors */
+  --destructive:       186  67  43;   /* #ba432b */
+  --destructive-foreground: 252 248 240;
+
+  /* Borders and inputs */
+  --border:            220 210 196;   /* #dcd2c4 */
+  --input:             220 210 196;
+  --ring:              37  99  112;   /* matches primary */
+
+  /* Border radius — slightly softened, not pill-shaped */
+  --radius: 0.5rem;
+
+  /* ── ThinkMate custom tokens (not in shadcn base) ── */
+
+  /* Understanding level indicator colors */
+  --level-novice:      186  67  43;   /* terracotta */
+  --level-developing:  217 143  52;   /* amber */
+  --level-proficient:   87 143 115;   /* sage */
+  --level-advanced:     37  99 112;   /* teal */
+
+  /* Hint tier colors */
+  --hint-1:            87  143 115;
+  --hint-2:            217 143  52;
+  --hint-3:            186  67  43;
+
+  /* Chat bubble colors */
+  --bubble-ai:         237 230 218;   /* warm grey — AI messages */
+  --bubble-student:     37  99 112;   /* primary — student messages */
+
+  /* Sidebar */
+  --sidebar-bg:        247 242 233;   /* slightly warmer than background */
+  --sidebar-border:    220 210 196;
+
+  /* Typography scale */
+  --font-display: 'Lora', Georgia, serif;
+  --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Shadow tokens */
+  --shadow-sm:   0 1px 3px rgba(20,17,12,0.06), 0 1px 2px rgba(20,17,12,0.04);
+  --shadow-md:   0 4px 12px rgba(20,17,12,0.08), 0 2px 4px rgba(20,17,12,0.04);
+  --shadow-lg:   0 12px 32px rgba(20,17,12,0.10), 0 4px 8px rgba(20,17,12,0.06);
+  --shadow-glow: 0 0 0 3px rgba(37,99,112,0.15);
+}
+
+/* ── Dark mode ─────────────────────────────────────────────── */
+.dark {
+  --background:        16  14  11;    /* #100e0b — near black, warm */
+  --foreground:        237 230 218;   /* #ede6da */
+
+  --card:              24  21  16;    /* #181510 */
+  --card-foreground:   237 230 218;
+
+  --popover:           24  21  16;
+  --popover-foreground: 237 230 218;
+
+  --primary:           72  163 181;   /* #48a3b5 — lighter teal for dark */
+  --primary-foreground: 16  14  11;
+
+  --secondary:         217 143  52;
+  --secondary-foreground: 16 14 11;
+
+  --muted:             40  35  28;    /* #28231c */
+  --muted-foreground:  158 143 124;   /* #9e8f7c */
+
+  --accent:            87  143 115;
+  --accent-foreground: 16  14  11;
+
+  --destructive:       204  88  62;   /* slightly brighter for dark */
+  --destructive-foreground: 16 14 11;
+
+  --border:            48  42  34;    /* #302a22 */
+  --input:             48  42  34;
+  --ring:              72  163 181;
+
+  --sidebar-bg:        20  18  13;
+  --sidebar-border:    48  42  34;
+
+  --bubble-ai:         40  35  28;
+  --bubble-student:    37  99 112;
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.35);
+  --shadow-lg:   0 12px 32px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 0 3px rgba(72,163,181,0.2);
+}
+
+/* ── Base reset & typography ───────────────────────────────── */
+* {
+  border-color: rgb(var(--border));
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+}
+
+/* ── ThinkMate utility classes ─────────────────────────────── */
+
+/* AI question card — the thing students read most */
+.tm-question-card {
+  background: rgb(var(--bubble-ai));
+  border-left: 3px solid rgb(var(--primary));
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Student response bubble */
+.tm-response-bubble {
+  background: rgb(var(--bubble-student));
+  color: rgb(var(--primary-foreground));
+  border-radius: var(--radius);
+  padding: 0.875rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Understanding level badge variants */
+.tm-level-novice      { background: rgb(var(--level-novice) / 0.12);      color: rgb(var(--level-novice));      border: 1px solid rgb(var(--level-novice) / 0.3); }
+.tm-level-developing  { background: rgb(var(--level-developing) / 0.12);  color: rgb(var(--level-developing));  border: 1px solid rgb(var(--level-developing) / 0.3); }
+.tm-level-proficient  { background: rgb(var(--level-proficient) / 0.12);  color: rgb(var(--level-proficient));  border: 1px solid rgb(var(--level-proficient) / 0.3); }
+.tm-level-advanced    { background: rgb(var(--level-advanced) / 0.12);    color: rgb(var(--level-advanced));    border: 1px solid rgb(var(--level-advanced) / 0.3); }
+
+/* Misconception flag */
+.tm-misconception-flag {
+  background: rgb(var(--destructive) / 0.08);
+  border: 1px solid rgb(var(--destructive) / 0.25);
+  color: rgb(var(--destructive));
+  border-radius: var(--radius);
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8125rem;
+}
+
+/* Sidebar active item */
+.tm-sidebar-item-active {
+  background: rgb(var(--primary) / 0.1);
+  color: rgb(var(--primary));
+  border-right: 2px solid rgb(var(--primary));
+}
+
+/* Hint tier styling */
+.tm-hint-tier-1 { border-left-color: rgb(var(--hint-1)); }
+.tm-hint-tier-2 { border-left-color: rgb(var(--hint-2)); }
+.tm-hint-tier-3 { border-left-color: rgb(var(--hint-3)); }
+
+/* Focus ring override — uses our primary color */
+.tm-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-glow);
+}
+
+/* Smooth fade-in for AI responses */
+@keyframes tm-fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tm-animate-in {
+  animation: tm-fadeSlideIn 0.3s ease-out forwards;
+}
+
+/* Thinking pulse — shown while AI is processing */
+@keyframes tm-thinking {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50%       { opacity: 1;   transform: scale(1); }
+}
+
+.tm-thinking-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(var(--primary));
+  animation: tm-thinking 1.2s ease-in-out infinite;
+}
+.tm-thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+.tm-thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Grain texture overlay for depth (applied to body or specific panels) */
+.tm-grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted-foreground) / 0.5);
+}
+
+/* Streaming cursor blink animation */
+@keyframes tm-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
